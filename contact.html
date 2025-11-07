@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Get a Quote | Empowering The Nation</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    body {
+      font-family: "Poppins", sans-serif;
+      background-color: #f9faf8;
+      margin: 0;
+      padding: 0;
+      color: #222;
+    }
+
+    header {
+      background-color: #013220;
+      color: white;
+      text-align: center;
+      padding: 20px;
+    }
+
+    nav ul {
+      list-style: none;
+      background-color: #024b2c;
+      display: flex;
+      justify-content: center;
+      padding: 0;
+      margin: 0;
+    }
+
+    nav ul li {
+      margin: 0 20px;
+    }
+
+    nav ul li a {
+      color: white;
+      text-decoration: none;
+      padding: 10px 20px;
+      font-weight: 600;
+      border-radius: 6px;
+    }
+
+    nav ul li a:hover,
+    .active {
+      background-color: #ffcc00;
+      color: #024b2c !important;
+    }
+
+    form {
+      background: white;
+      max-width: 700px;
+      margin: 40px auto;
+      padding: 40px;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    h2 {
+      text-align: center;
+      color: #024b2c;
+      margin-bottom: 25px;
+    }
+
+    label {
+      display: block;
+      margin: 10px 0 5px;
+      font-weight: bold;
+    }
+
+    input[type="text"], input[type="email"], input[type="tel"] {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 1em;
+    }
+
+    .course-list {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-top: 15px;
+    }
+
+    .course-list label {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    button {
+      background-color: #024b2c;
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      border-radius: 8px;
+      font-size: 1em;
+      cursor: pointer;
+      display: block;
+      margin: 0 auto;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background-color: #ffcc00;
+      color: #024b2c;
+    }
+
+    .output-box {
+      background: #f3fff3;
+      border-radius: 8px;
+      margin-top: 20px;
+      padding: 15px;
+      border: 1px solid #cce8cc;
+    }
+
+    .output-box p {
+      margin: 8px 0;
+      font-size: 1.05em;
+    }
+
+    footer {
+      background-color: #013220;
+      color: white;
+      text-align: center;
+      padding: 20px;
+      margin-top: 50px;
+    }
+
+    .popup {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: white;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+      text-align: center;
+      z-index: 1000;
+    }
+
+    .popup h3 {
+      margin: 0 0 10px;
+      color: #024b2c;
+    }
+
+    .popup button {
+      background-color: #024b2c;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    .popup button:hover {
+      background-color: #ffcc00;
+      color: #024b2c;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Get a Quote</h1>
+    <p>Choose your courses and calculate your total including VAT and discounts.</p>
+  </header>
+
+  <nav>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="courses.html">Courses</a></li>
+      <li><a href="contact.html" class="active">Get a Quote</a></li>
+    </ul>
+  </nav>
+
+  <form id="quoteForm">
+    <h2>Course Quote Form</h2>
+    <label for="fullName">Full Name:</label>
+    <input type="text" id="fullName" placeholder="Enter your full name" required>
+
+    <label for="email">Email Address:</label>
+    <input type="email" id="email" placeholder="Enter your email address" required>
+
+    <label for="phone">Phone Number:</label>
+    <input type="tel" id="phone" placeholder="Enter your phone number" required>
+
+    <label>Select Courses:</label>
+    <div class="course-list">
+      <label><input type="checkbox" value="750"> Child Minding (R750)</label>
+      <label><input type="checkbox" value="750"> Cooking (R750)</label>
+      <label><input type="checkbox" value="750"> Garden Maintenance (R750)</label>
+      <label><input type="checkbox" value="1500"> First Aid (R1500)</label>
+      <label><input type="checkbox" value="1500"> Sewing (R1500)</label>
+      <label><input type="checkbox" value="1500"> Landscaping (R1500)</label>
+      <label><input type="checkbox" value="1500"> Life Skills (R1500)</label>
+    </div>
+
+    <button type="button" onclick="calculateQuote()">Calculate Quote</button>
+
+    <div id="output" class="output-box">
+      <p><strong>Subtotal:</strong> R<span id="subtotal">0</span></p>
+      <p><strong>Discount (10% if 3+ courses):</strong> R<span id="discount">0</span></p>
+      <p><strong>VAT (15%):</strong> R<span id="vat">0</span></p>
+      <p><strong>Total Payable:</strong> R<span id="total">0</span></p>
+    </div>
+  </form>
+
+  <div id="popup" class="popup">
+    <h3>Thank You!</h3>
+    <p>A consultant will contact you shortly with more details about your selected courses.</p>
+    <button onclick="closePopup()">OK</button>
+  </div>
+
+  <footer>
+    <p>© 2025 Empowering The Nation | Building Skills. Shaping Futures. Empowering Communities.</p>
+  </footer>
+
+  <script>
+    function calculateQuote() {
+      const checkboxes = document.querySelectorAll('.course-list input[type="checkbox"]:checked');
+      if (checkboxes.length === 0) {
+        alert('Please select at least one course.');
+        return;
+      }
+
+      let subtotal = 0;
+      checkboxes.forEach(c => subtotal += parseFloat(c.value));
+
+      let discount = checkboxes.length >= 3 ? subtotal * 0.1 : 0;
+      let afterDiscount = subtotal - discount;
+      let vat = afterDiscount * 0.15;
+      let total = afterDiscount + vat;
+
+      document.getElementById('subtotal').innerText = subtotal.toFixed(2);
+      document.getElementById('discount').innerText = discount.toFixed(2);
+      document.getElementById('vat').innerText = vat.toFixed(2);
+      document.getElementById('total').innerText = total.toFixed(2);
+
+      // Show popup
+      document.getElementById('popup').style.display = "block";
+    }
+
+    function closePopup() {
+      document.getElementById('popup').style.display = "none";
+    }
+  </script>
+</body>
+</html>
